@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,12 +12,31 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('name', 50);
+            $table->string('email', 50)->unique();
+            $table->string('password', 50);
+            $table->string('phone', 10)->nullable();
+            $table->string('position', 50)->nullable();
+            $table->enum('status', ['Hoạt động', 'Không hoạt động', 'Đình chỉ'])->default('Hoạt động');
+            $table->string('id_number', 12)->nullable();
+            $table->date('id_issued_date')->nullable();
+            $table->string('id_issued_place', 255)->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->enum('gender', ['Nam', 'Nữ', 'Khác'])->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('emergency_contact', 255)->nullable();
+            $table->decimal('base_salary', 15, 0)->nullable();
+            $table->decimal('hourly_rate', 10, 0)->nullable();
+            $table->string('tax_code', 13)->nullable();
+            $table->string('bank_name', 50)->nullable();
+            $table->string('bank_branch', 50)->nullable();
+            $table->string('bank_account_number', 20)->nullable();
+            $table->string('bank_account_name', 50)->nullable();
+            $table->date('joined_at')->nullable();
+            $table->date('left_at')->nullable();
+            $table->text('note')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
