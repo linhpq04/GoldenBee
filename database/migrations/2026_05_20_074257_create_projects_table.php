@@ -28,6 +28,9 @@ return new class extends Migration {
             $table->smallInteger('warranty_months')->nullable();
             $table->date('warranty_expires_at')->nullable();
             $table->text('note')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->foreignId('manager_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
             $table->string('code', 20)->unique();
-            $table->string('title', 50);
+            $table->string('title', 255);
             $table->string('type', 50);
             $table->enum('status', ['Bản nháp', 'Chờ ký', 'Đang hiệu lực', 'Hết hạn', 'Đã hủy'])->default('Bản nháp');
             $table->text('description')->nullable();
@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->string('file_path', 255)->nullable();
             $table->text('note')->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
         });
     }
 

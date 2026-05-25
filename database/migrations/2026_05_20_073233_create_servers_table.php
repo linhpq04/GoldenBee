@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('ssh_host', 255)->nullable();
             $table->smallInteger('ssh_port')->nullable();
             $table->string('ssh_username', 50)->nullable();
-            $table->string('ssh_password', 50)->nullable();
+            $table->text('ssh_password')->nullable();
             $table->text('ssh_key')->nullable();
             $table->text('note')->nullable();
             $table->timestamp('created_at')->useCurrent();

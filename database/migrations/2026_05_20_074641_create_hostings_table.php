@@ -30,14 +30,14 @@ return new class extends Migration {
             $table->boolean('auto_renew')->default(false);
             $table->smallInteger('remind_days')->default(30);
             $table->string('cpanel_username', 50)->nullable();
-            $table->string('cpanel_password', 50)->nullable();
+            $table->text('cpanel_password')->nullable();
             $table->string('ftp_host', 50)->nullable();
             $table->string('ftp_username', 50)->nullable();
-            $table->string('ftp_password', 50)->nullable();
+            $table->text('ftp_password')->nullable();
             $table->string('db_host', 50)->nullable();
             $table->string('db_name', 50)->nullable();
             $table->string('db_username', 50)->nullable();
-            $table->string('db_password', 50)->nullable();
+            $table->text('db_password')->nullable();
             $table->text('note')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();

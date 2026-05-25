@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
             $table->foreignId('assignee_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('code', 13)->unique();
-            $table->string('title', 50);
+            $table->string('title', 255);
             $table->text('description');
             $table->string('file_path', 255)->nullable();
             $table->string('category', 50);

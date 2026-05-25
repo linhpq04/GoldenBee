@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('parent_task_id')->nullable()->constrained('tasks')->nullOnDelete();
             $table->foreignId('assignee_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('title', 50);
+            $table->string('title', 255);
             $table->text('description')->nullable();
             $table->string('task_type', 50)->nullable();
             $table->enum('status', ['Chưa làm', 'Đang làm', 'Đang review', 'Hoàn thành', 'Tạm dừng'])->default('Chưa làm');

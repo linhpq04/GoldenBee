@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
             $table->foreignId('hosting_id')->nullable()->constrained('hostings')->nullOnDelete();
-            $table->string('provider_name', 50)->nullable();
+            $table->string('provider_name', 255)->nullable();
             $table->string('domain_name', 50)->unique();
             $table->enum('status', ['Hoạt động', 'Ngừng hoạt động', 'Hết hạn', 'Đang chuyển'])->default('Hoạt động');
             $table->decimal('purchase_price', 15, 0)->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->string('servername_3', 255)->nullable();
             $table->string('servername_4', 255)->nullable();
             $table->string('login_username', 50)->nullable();
-            $table->string('login_password', 50)->nullable();
+            $table->text('login_password')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

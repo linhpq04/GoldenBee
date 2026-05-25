@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
+            $table->decimal('total_amount', 15, 0)->default(0);
             $table->date('enrolled_at');
             $table->enum('status', ['Đang học', 'Hoàn thành', 'Đã hủy', 'Tạm dừng'])->default('Đang học');
             $table->decimal('paid_amount', 15, 0)->default(0);
