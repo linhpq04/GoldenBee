@@ -7,6 +7,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -34,6 +35,16 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([FilamentShieldPlugin::make()])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\Filament\Admin\Pages')
+            ->navigationGroups([
+                NavigationGroup::make()->label('Quản lý khách hàng'),
+                NavigationGroup::make()->label('Dịch vụ định kỳ'),
+                NavigationGroup::make()->label('Tài chính'),
+                NavigationGroup::make()->label('Quản lý dự án'),
+                NavigationGroup::make()->label('Bán hàng'),
+                NavigationGroup::make()->label('Dịch vụ khách hàng'),
+                NavigationGroup::make()->label('Đào tạo'),
+                NavigationGroup::make()->label('Nhân sự'),
+            ])
             ->pages([
                 Dashboard::class,
             ])

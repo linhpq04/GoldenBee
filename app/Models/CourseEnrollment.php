@@ -16,6 +16,7 @@ class CourseEnrollment extends Model
         'customer_id',
         'enrolled_at',
         'status',
+        'total_amount',
         'paid_amount',
         'note',
     ];

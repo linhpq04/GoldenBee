@@ -24,6 +24,8 @@ class Invoice extends Model
         'invoice_email',
         'service_type',
         'invoice_content',
+        'contract_id',
+        'created_by',
     ];
 
     protected $casts = [
