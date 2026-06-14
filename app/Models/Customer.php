@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    public $timestamps = false;
+    use SoftDeletes;
+    public $timestamps = true;
 
     protected $fillable = [
         'code',
@@ -26,8 +28,33 @@ class Customer extends Model
         'note',
     ];
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = null;
+    protected static function booted(): void
+    {
+        static::creating(function (Customer $customer) {
+            if (empty($customer->code)) {
+                $customer->code = static::generateCode();
+            }
+        });
+    }
+
+    public static function generateCode(): string
+    {
+        $datePart = now()->format('dmy'); // ddmmyy
+        $prefix = 'KH-' . $datePart;
+
+        $lastToday = static::where('code', 'like', $prefix . '-%')
+            ->orderByDesc('code')
+            ->value('code');
+
+        if ($lastToday) {
+            $lastNumber = (int) substr($lastToday, -3);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            $nextNumber = 1;
+        }
+
+        return $prefix . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+    }
 
     // Relations
     public function quotations()

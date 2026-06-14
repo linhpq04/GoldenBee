@@ -31,6 +31,8 @@ return new class extends Migration {
             $table->string('region', 50)->nullable();
             $table->text('note')->nullable();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->softDeletes();
         });
     }
 
