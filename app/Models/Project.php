@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\GeneratesCode;
 
 class Project extends Model
 {
-    public $timestamps = false;
+    use GeneratesCode;
+    protected static string $codePrefix = 'DA';
 
     protected $fillable = [
         'customer_id',
@@ -25,6 +27,8 @@ class Project extends Model
         'warranty_months',
         'warranty_expires_at',
         'note',
+        'manager_id',
+        'created_by',
     ];
 
     protected $casts = [
@@ -35,6 +39,15 @@ class Project extends Model
         'budget' => 'decimal:0',
         'warranty_lifetime' => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Project $project) {
+            if (empty($project->code)) {
+                $project->code = static::generateCode();
+            }
+        });
+    }
 
     // Relations
     public function customer()
@@ -70,5 +83,15 @@ class Project extends Model
     public function supportTickets()
     {
         return $this->hasMany(SupportTicket::class);
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

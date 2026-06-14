@@ -37,8 +37,7 @@ return new class extends Migration {
             $table->date('joined_at')->nullable();
             $table->date('left_at')->nullable();
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

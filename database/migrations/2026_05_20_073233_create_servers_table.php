@@ -28,8 +28,7 @@ return new class extends Migration {
             $table->text('ssh_password')->nullable();
             $table->text('ssh_key')->nullable();
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
     }
 

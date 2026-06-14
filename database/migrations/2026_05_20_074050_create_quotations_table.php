@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('code', 13)->unique();
-            $table->enum('status', ['Bản nháp', 'Chờ duyệt', 'Đã gửi', 'Chấp nhận', 'Từ chối'])->default('Bản nháp');
+            $table->unsignedTinyInteger('version')->default(1);
+            $table->enum('status', ['Bản nháp', 'Chờ duyệt', 'Đã gửi', 'Chấp nhận', 'Từ chối', 'Đã chuyển DA'])->default('Bản nháp');
             $table->date('valid_until')->nullable();
             $table->string('title', 255);
             $table->text('description')->nullable();
@@ -22,7 +23,8 @@ return new class extends Migration {
             $table->decimal('tax_amount', 15, 0)->default(0);
             $table->decimal('total', 15, 0)->default(0);
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
         });
 
@@ -38,6 +40,7 @@ return new class extends Migration {
             $table->decimal('discount_percent', 5, 2)->default(0);
             $table->decimal('tax_percent', 5, 2)->default(0);
             $table->decimal('total', 15, 0)->default(0);
+            $table->timestamps();
         });
     }
 

@@ -29,10 +29,9 @@ return new class extends Migration {
             $table->string('invoice_email', 50)->nullable();
             $table->string('service_type', 50)->nullable();
             $table->text('invoice_content')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->foreignId('contract_id')->nullable()->constrained('contracts')->nullOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamps();
         });
     }
 

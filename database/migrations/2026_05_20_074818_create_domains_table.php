@@ -32,8 +32,7 @@ return new class extends Migration {
             $table->string('servername_4', 255)->nullable();
             $table->string('login_username', 50)->nullable();
             $table->text('login_password')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
     }
 

@@ -30,8 +30,6 @@ class Server extends Model
         'ssh_key',
     ];
 
-    const UPDATED_AT = 'updated_at';
-
     // Relations
     public function hostings()
     {

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->date('work_date');
             $table->decimal('hours', 5, 2);
             $table->text('description')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

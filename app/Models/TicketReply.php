@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TicketReply extends Model
 {
-    public $timestamps = false;
-
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = null;
-
     protected $fillable = [
         'ticket_id',
         'customer_id',

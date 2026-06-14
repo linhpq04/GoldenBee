@@ -39,8 +39,6 @@ class Invoice extends Model
         'paid_amount' => 'decimal:0',
     ];
 
-    const UPDATED_AT = 'updated_at';
-
     // Relations
     public function customer()
     {

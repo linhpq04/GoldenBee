@@ -28,8 +28,8 @@ return new class extends Migration {
             $table->date('end_date')->nullable();
             $table->string('file_path', 255)->nullable();
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamps();
         });
     }
 

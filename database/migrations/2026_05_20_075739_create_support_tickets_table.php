@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->enum('status', ['Mới', 'Đang xử lý', 'Chờ phản hồi', 'Đã giải quyết', 'Đóng'])->default('Mới');
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
+            $table->timestamps();
         });
 
         Schema::create('ticket_replies', function (Blueprint $table) {
@@ -34,7 +35,7 @@ return new class extends Migration {
             $table->enum('sender_type', ['user', 'customer']);
             $table->text('content');
             $table->string('file_path', 255)->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

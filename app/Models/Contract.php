@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
-    public $timestamps = false;
-
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = null;
-
     protected $fillable = [
         'customer_id',
         'project_id',

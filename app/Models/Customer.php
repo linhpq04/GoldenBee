@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\GeneratesCode;
 
 class Customer extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
+    use SoftDeletes, GeneratesCode;
+    protected static string $codePrefix = 'KH';
 
     protected $fillable = [
         'code',
@@ -35,25 +36,6 @@ class Customer extends Model
                 $customer->code = static::generateCode();
             }
         });
-    }
-
-    public static function generateCode(): string
-    {
-        $datePart = now()->format('dmy'); // ddmmyy
-        $prefix = 'KH-' . $datePart;
-
-        $lastToday = static::where('code', 'like', $prefix . '-%')
-            ->orderByDesc('code')
-            ->value('code');
-
-        if ($lastToday) {
-            $lastNumber = (int) substr($lastToday, -3);
-            $nextNumber = $lastNumber + 1;
-        } else {
-            $nextNumber = 1;
-        }
-
-        return $prefix . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
     }
 
     // Relations

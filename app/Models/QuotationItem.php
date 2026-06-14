@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuotationItem extends Model
 {
-    public $timestamps = false;
-
     protected $fillable = [
         'quotation_id',
         'service_type',

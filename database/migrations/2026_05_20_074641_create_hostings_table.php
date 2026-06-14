@@ -39,8 +39,7 @@ return new class extends Migration {
             $table->string('db_username', 50)->nullable();
             $table->text('db_password')->nullable();
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
     }
 

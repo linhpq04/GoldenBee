@@ -20,8 +20,7 @@ return new class extends Migration {
             $table->smallInteger('max_student')->nullable();
             $table->decimal('duration_hours', 5, 2)->nullable();
             $table->decimal('price', 15, 0)->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
 
         Schema::create('course_enrollments', function (Blueprint $table) {
@@ -33,7 +32,7 @@ return new class extends Migration {
             $table->enum('status', ['Đang học', 'Hoàn thành', 'Đã hủy', 'Tạm dừng'])->default('Đang học');
             $table->decimal('paid_amount', 15, 0)->default(0);
             $table->text('note')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
