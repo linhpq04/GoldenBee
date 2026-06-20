@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('contracts')->nullOnDelete();
             $table->string('code', 20)->unique();
             $table->string('title', 255);
             $table->string('type', 50);
@@ -30,6 +31,7 @@ return new class extends Migration {
             $table->text('note')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
