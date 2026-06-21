@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Tasks\Pages;
 use App\Filament\Admin\Resources\Tasks\TaskResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 
 class EditTask extends EditRecord
 {
@@ -13,7 +14,8 @@ class EditTask extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->visible(fn() => Auth::user()->hasAnyRole(['super_admin', 'admin'])),
         ];
     }
 }
