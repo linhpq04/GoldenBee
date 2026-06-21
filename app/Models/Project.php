@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\GeneratesCode;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
-    use GeneratesCode;
+    use GeneratesCode, SoftDeletes;
     protected static string $codePrefix = 'DA';
 
     protected $fillable = [
@@ -46,7 +48,18 @@ class Project extends Model
             if (empty($project->code)) {
                 $project->code = static::generateCode();
             }
+
+            if (empty($project->created_by)) {
+                $project->created_by = Auth::id();
+            }
         });
+    }
+
+    public function getIsOverdueAttribute(): bool
+    {
+        return $this->end_date
+            && optional($this->end_date)->isPast()
+            && !in_array($this->status, ['Hoàn thành', 'Đã hủy']);
     }
 
     // Relations
