@@ -30,7 +30,10 @@ return new class extends Migration {
             $table->string('service_type', 50)->nullable();
             $table->text('invoice_content')->nullable();
             $table->foreignId('contract_id')->nullable()->constrained('contracts')->nullOnDelete();
+            $table->string('file_path')->nullable();
+            $table->text('note')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
