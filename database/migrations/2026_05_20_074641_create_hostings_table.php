@@ -39,6 +39,7 @@ return new class extends Migration {
             $table->string('db_username', 50)->nullable();
             $table->text('db_password')->nullable();
             $table->text('note')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

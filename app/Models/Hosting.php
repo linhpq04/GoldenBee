@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hosting extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'customer_id',
         'project_id',
@@ -50,6 +53,21 @@ class Hosting extends Model
         'service_fee' => 'decimal:0',
         'selling_price' => 'decimal:0',
     ];
+
+    public function getIsExpiredAttribute(): bool
+    {
+        return $this->expires_at
+            && optional($this->expires_at)->isPast()
+            && !in_array($this->status, ['Ngừng hoạt động', 'Hết hạn']);
+    }
+
+    public function getIsExpiringSoonAttribute(): bool
+    {
+        return $this->expires_at
+            && $this->expires_at->isFuture()
+            && $this->expires_at->diffInDays(now()) <= 30
+            && $this->status === 'Hoạt động';
+    }
 
     // Relations
     public function customer()
