@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->smallInteger('max_student')->nullable();
             $table->decimal('duration_hours', 5, 2)->nullable();
             $table->decimal('price', 15, 0)->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
 

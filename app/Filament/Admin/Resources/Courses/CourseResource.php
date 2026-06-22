@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Courses;
 use App\Filament\Admin\Resources\Courses\Pages\CreateCourse;
 use App\Filament\Admin\Resources\Courses\Pages\EditCourse;
 use App\Filament\Admin\Resources\Courses\Pages\ListCourses;
+use App\Filament\Admin\Resources\Courses\RelationManagers\EnrollmentsRelationManager;
 use App\Filament\Admin\Resources\Courses\Schemas\CourseForm;
 use App\Filament\Admin\Resources\Courses\Tables\CoursesTable;
 use App\Models\Course;
@@ -37,7 +38,7 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EnrollmentsRelationManager::class,
         ];
     }
 
