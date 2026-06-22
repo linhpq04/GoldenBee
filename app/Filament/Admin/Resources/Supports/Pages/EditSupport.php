@@ -4,7 +4,10 @@ namespace App\Filament\Admin\Resources\Supports\Pages;
 
 use App\Filament\Admin\Resources\Supports\SupportResource;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 
 class EditSupport extends EditRecord
 {
@@ -13,7 +16,13 @@ class EditSupport extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            RestoreAction::make(),
+
+            DeleteAction::make()
+                ->visible(fn() => Auth::user()->hasAnyRole(['super_admin', 'admin'])),
+
+            ForceDeleteAction::make()
+                ->visible(fn() => Auth::user()->hasRole('super_admin')),
         ];
     }
 }

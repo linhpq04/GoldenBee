@@ -18,12 +18,13 @@ return new class extends Migration {
             $table->string('code', 13)->unique();
             $table->string('title', 255);
             $table->text('description');
-            $table->string('file_path', 255)->nullable();
+            $table->json('file_path')->nullable();
             $table->string('category', 50);
             $table->enum('priority', ['Thấp', 'Trung bình', 'Cao', 'Khẩn cấp'])->default('Trung bình');
             $table->enum('status', ['Mới', 'Đang xử lý', 'Chờ phản hồi', 'Đã giải quyết', 'Đóng'])->default('Mới');
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 
