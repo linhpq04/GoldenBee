@@ -34,6 +34,7 @@ return new class extends Migration {
             $table->text('note')->nullable();
             $table->string('file_path', 255)->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
             $table->timestamps();
         });
     }

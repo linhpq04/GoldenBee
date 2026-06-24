@@ -28,12 +28,14 @@ class SalaryPayment extends Model
         'detail_description',
         'note',
         'file_path',
+        'approved_by',
+        'project_id',
     ];
 
     protected $casts = [
-        'payment_date' => 'date',
-        'from_date' => 'date',
-        'to_date' => 'date',
+        'payment_date' => 'datetime',
+        'from_date' => 'datetime',
+        'to_date' => 'datetime',
         'work_hours' => 'decimal:2',
         'hourly_rate' => 'decimal:0',
         'base_salary' => 'decimal:0',
@@ -48,5 +50,15 @@ class SalaryPayment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function approvedBy()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }

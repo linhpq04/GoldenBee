@@ -49,4 +49,14 @@ class SalaryResource extends Resource
             'edit' => EditSalary::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) SalaryPayment::where('status', 'Chờ duyệt')->count() ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): string
+    {
+        return 'warning';
+    }
 }
