@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Supports;
 use App\Filament\Admin\Resources\Supports\Pages\CreateSupport;
 use App\Filament\Admin\Resources\Supports\Pages\EditSupport;
 use App\Filament\Admin\Resources\Supports\Pages\ListSupports;
+use App\Filament\Admin\Resources\Supports\RelationManagers\RepliesRelationManager;
 use App\Filament\Admin\Resources\Supports\Schemas\SupportForm;
 use App\Filament\Admin\Resources\Supports\Tables\SupportsTable;
 use App\Models\SupportTicket;
@@ -37,7 +38,7 @@ class SupportResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RepliesRelationManager::class,
         ];
     }
 
